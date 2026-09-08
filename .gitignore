@@ -1,0 +1,13 @@
+# Sensitive wallet artifacts — never commit
+keys.export
+*.export
+txs/
+message.sig
+*.zprv
+seed*
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.DS_Store

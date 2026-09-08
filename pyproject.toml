@@ -1,0 +1,16 @@
+[project]
+name = "nockchain-migration"
+version = "0.1.0"
+description = "Gated driver for the Nockchain legacy v0 -> v1 P2PKH wallet migration"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nockchain_migration"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
