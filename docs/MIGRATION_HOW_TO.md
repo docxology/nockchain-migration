@@ -82,6 +82,10 @@ uv run --project ... python scripts/migrate.py import \
 # → prompt: "Operator: type/paste the seed phrase now (input hidden)"
 ```
 
+The driver collects the phrase itself at that hidden prompt and invokes
+`nockchain-wallet import-keys` once; nothing is written to disk or to shell
+history. The wizard does the same in its Stage 2.
+
 Then set the legacy v0 master active (it must be the active master while the
 sweep runs — that is why import happens **before** keygen):
 

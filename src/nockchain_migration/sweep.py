@@ -94,8 +94,6 @@ def parse_sweep_output(text: str, txs_dir: Path) -> list[MigrationTx]:
     return records
 
 
-
-
 def reconcile(
     records: list[MigrationTx], pre_v0_balance_nicks: int, tolerance_nicks: int = 1
 ) -> bool:
