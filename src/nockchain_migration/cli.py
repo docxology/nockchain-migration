@@ -21,7 +21,7 @@ from pathlib import Path
 
 from .confirm import address_groups, confirm, confirm_destination
 from .sweep import MigrationTx, parse_sweep_output, reconcile, summary_table
-from .units import format_amount
+from .units import NICKS_PER_NOCK, format_amount
 from .wallet import Wallet, WalletError
 
 LOG = sys.stderr
@@ -41,12 +41,12 @@ def parse_balance_nicks(text: str) -> int:
     """
     import re
 
-    nocks_m = re.search(r"([0-9]+)\s*nocks", text)
+    nocks_m = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*nocks", text)
     nicks_m = re.search(r"([0-9]+)\s*nicks", text)
     if nocks_m or nicks_m:
-        nocks = int(nocks_m.group(1)) if nocks_m else 0
+        nocks = float(nocks_m.group(1)) if nocks_m else 0.0
         nicks = int(nicks_m.group(1)) if nicks_m else 0
-        return nocks * 65_536 + nicks
+        return int(round(nocks * NICKS_PER_NOCK)) + nicks
     m = re.search(r"Balance \(raw\):\s*([0-9]+)", text)
     if m:
         return int(m.group(1))

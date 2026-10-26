@@ -35,7 +35,7 @@ operators who prefer one phase at a time.
 | Requirement | Check |
 |---|---|
 | `git`, `make`, C toolchain, Rust (rustup) | `rustup --version && which git make cc` |
-| This repo cloned | `git clone git@github.com:docxology/nockchain-migration.git` |
+| This repo cloned | `git clone https://github.com/docxology/nockchain-migration.git` |
 | A dedicated workspace dir | `mkdir -p ~/nockchain-migration` — the wallet writes `./txs/*.tx` and `keys.export` into cwd |
 | ~30–60 min of uninterrupted time | the runbook has human gates; do not rush them |
 | Your seed phrase written down offline | if the phrase was generated **before October 2025** it is probably version 0 |
@@ -68,10 +68,10 @@ uv run --project /path/to/nockchain-migration \
 
 Expected: `Phase 0 OK: wallet on PATH, public API reachable, workspace in use.`
 If it fails, **stop** — do not improvise an alternative build. The default
-public endpoint is `23.252.122.18:5556`; override only if needed with
+public endpoint is `216.158.95.10:5556`; override only if needed with
 `--endpoint host:port`.
 
-## Phase 1/2 — import the legacy v0 seed phrase (HUMAN GATE)
+## Phase 2 — import the legacy v0 seed phrase (HUMAN GATE)
 
 The operator types the phrase at a hidden prompt. It is never echoed, logged,
 or stored.

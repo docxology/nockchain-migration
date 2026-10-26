@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 import subprocess
 from dataclasses import dataclass
+from pathlib import Path
 
 
 class WalletError(RuntimeError):

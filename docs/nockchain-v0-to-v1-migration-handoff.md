@@ -106,7 +106,7 @@ outrank speed. When in doubt, stop and ask.
 - `tx-accepted` returning `true` means the node **validated** the transaction;
   it is necessary but not sufficient — wait for canonical-chain inclusion
   before declaring victory.
-- Default public endpoint: `23.252.122.18:5556` (no local node required).
+- Default public endpoint: `216.158.95.10:5556` (no local node required).
 - Mixed v0/v1 note sets are rejected in manual `create-tx`; auto-selection is
   v1-only. That is why the dedicated `migrate-v0-notes` command exists.
 
@@ -194,14 +194,13 @@ migration destination.
 
    ```bash
    cd ~/nockchain-migration
-   read -rs SEEDPHRASE && echo
-   nockchain-wallet import-keys --seedphrase "$SEEDPHRASE" --version 0
-   unset SEEDPHRASE
-   history -d $((HISTCMD-1)) 2>/dev/null
+   nockchain-wallet import-keys --seedphrase --version 0
    ```
 
-   (Adapt to your shell; the requirements are: hidden input, single use,
-   immediate unset, no history persistence.)
+   The wallet prompts for the phrase itself without echoing it, so the seed
+   never appears in shell history or in the process argument list. Do not
+   pass the phrase as a command-line value.
+
 3. Verify the legacy master is present:
 
    ```bash
@@ -388,7 +387,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Keys
 nockchain-wallet keygen
-nockchain-wallet import-keys --seedphrase "$SEEDPHRASE" --version 0   # or 1
+nockchain-wallet import-keys --seedphrase --version 0   # prompts, or 1
 nockchain-wallet import-keys --file keys.export
 nockchain-wallet export-keys
 nockchain-wallet show-master-zprv        # sensitive — operator eyes only

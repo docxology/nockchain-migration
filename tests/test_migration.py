@@ -172,5 +172,6 @@ Wallet balance from block DEMOBLOCK1 at height 142.733
 - Balance (raw): 8000010400 nicks"""
     assert parse_balance_nicks(real) == 8000010400
     assert parse_balance_nicks("Balance: 1 nocks 100 nicks") == 65636
+    assert parse_balance_nicks("Balance: 1.5 nocks 0 nicks") == 98304
     assert parse_balance_nicks("Balance: 0 nicks") == 0
     assert parse_balance_nicks("Balance (raw): 8000010400 nicks") == 8000010400

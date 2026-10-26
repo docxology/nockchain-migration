@@ -14,3 +14,8 @@ packages = ["src/nockchain_migration"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]

@@ -38,6 +38,9 @@ is no `--yes` flag by design.
 
 ## Usage
 
+Prerequisites: Python 3.11+ and [`uv`](https://docs.astral.sh/uv/) (`uv` also
+installs the dev dependency group used by the tests).
+
 From a dedicated workspace directory (the wallet writes `./txs/*.tx` and
 `keys.export` to cwd):
 

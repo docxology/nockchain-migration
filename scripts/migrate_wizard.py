@@ -41,17 +41,6 @@ def ask(prompt: str, default: str = "") -> str:
     return answer or default
 
 
-def choose(prompt: str, options: list[str]) -> str:
-    """Numbered single-choice from a list; returns the chosen item."""
-    for i, opt in enumerate(options, 1):
-        print(f"  {i}. {opt}")
-    while True:
-        raw = ask(f"{prompt} (1-{len(options)})")
-        if raw.isdigit() and 1 <= int(raw) <= len(options):
-            return options[int(raw) - 1]
-        print("  Invalid choice.")
-
-
 # ── Stage 1: environment ─────────────────────────────────────────────────
 def stage_environment(wallet: Wallet) -> None:
     banner("STAGE 1/6 — ENVIRONMENT")
@@ -59,8 +48,8 @@ def stage_environment(wallet: Wallet) -> None:
         wallet.list_notes()
     except WalletError as exc:
         print(f"✗ Wallet not usable: {exc}")
-        print("  Build per runbook Phase 0 (make install-hoonc && "
-              "make install-nockchain-wallet in the nockchain repo).")
+        print("  Build per runbook Phase 0 (make install-nockchain-wallet "
+              "in the nockchain repo).")
         raise SystemExit(1)
     print(f"✓ {wallet.binary} on PATH, public API reachable, "
           f"workspace {wallet.workspace} in use.")
