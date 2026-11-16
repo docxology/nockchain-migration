@@ -8,6 +8,8 @@ This is a **real-value asset migration** tool. Every network-mutating step
 (`send-tx`) requires an explicit per-transaction operator confirmation; there
 is no `--yes` flag by design.
 
+![nockchain-migration Architecture Overview](docs/assets/architecture-overview.svg)
+
 ## Documentation
 
 - [docs/MIGRATION_HOW_TO.md](docs/MIGRATION_HOW_TO.md) — **start here**: the

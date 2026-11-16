@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 640" width="1120" height="640" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">nockchain-migration Architecture Overview</title>
+  <desc id="svg-desc">Operator-gated legacy v0 to v1 P2PKH wallet migration phases, balance reconciliation in nicks, and human broadcast safety gates.</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/></marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb"/></marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0d9488"/></marker>
+    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4f46e5"/></marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/></marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#059669"/></marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#e11d48"/></marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#7c3aed"/></marker>
+  </defs>
+  <rect x="4" y="4" width="1112" height="632" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="4" y="4" width="1112" height="68" rx="16" fill="#0f172a"/>
+  <rect x="4" y="56" width="1112" height="16" fill="#0f172a"/>
+  <line x1="4" y1="72" x2="1116" y2="72" stroke="#f59e0b" stroke-width="2.5"/>
+  <rect x="923" y="21" width="175" height="30" rx="15" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="1010.5" y="40.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.5" font-weight="700" fill="#f59e0b" text-anchor="middle">1 nock = 65,536 nicks</text>
+  <text x="26.0" y="32.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#f8fafc" text-anchor="start">nockchain-migration — Operator-Gated Legacy v0 → v1 P2PKH Migration</text>
+  <text x="26.0" y="54.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="500" fill="#cbd5e1" text-anchor="start">Executable phase state machine wrapping nockchain-wallet with mandatory human safety gates (no --yes flag)</text>
+  <rect x="20" y="88" width="1080" height="316" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="20" y="88" width="1080" height="32" rx="12" fill="#2563eb" fill-opacity="0.10"/>
+  <line x1="20" y1="120" x2="1100" y2="120" stroke="#2563eb" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="911" y="94" width="179" height="20" rx="6" fill="#2563eb" fill-opacity="0.16" stroke="#2563eb" stroke-width="0.8"/>
+  <text x="1000.5" y="108.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#2563eb" text-anchor="middle">Phase 2 precedes Phase 3</text>
+  <text x="34.0" y="109.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">1. Canonical Execution Phases (scripts/migrate.py · migrate_wizard.py → cli.py)</text>
+  <rect x="36" y="132" width="332" height="118" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="1.3"/>
+  <rect x="36" y="132" width="5" height="118" rx="2.5" fill="#2563eb"/>
+  <text x="50.0" y="152.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 0 — Workspace &amp; Endpoint Preflight</text>
+  <text x="50.0" y="170.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">phase_0(workspace, endpoint)</text>
+  <text x="50.0" y="186.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Creates dedicated cwd (./txs/, keys.export)</text>
+  <text x="50.0" y="203.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Wallet.list_notes() checks binary on PATH</text>
+  <text x="50.0" y="219.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">and live gRPC public endpoint reachability</text>
+  <rect x="394" y="132" width="332" height="118" rx="8" fill="#f8fafc" stroke="#0284c7" stroke-width="1.3"/>
+  <rect x="394" y="132" width="5" height="118" rx="2.5" fill="#0284c7"/>
+  <text x="408.0" y="152.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 2 — Hidden v0 Seed Import</text>
+  <text x="408.0" y="170.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">phase_2_import_seed(version=0)</text>
+  <text x="408.0" y="186.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">getpass hidden input (never echoed/saved)</text>
+  <text x="408.0" y="203.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Single-use del phrase memory wipe</text>
+  <text x="408.0" y="219.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Keeps v0 master active prior to keygen</text>
+  <rect x="752" y="132" width="332" height="118" rx="8" fill="#f8fafc" stroke="#0d9488" stroke-width="1.3"/>
+  <rect x="752" y="132" width="5" height="118" rx="2.5" fill="#0d9488"/>
+  <text x="766.0" y="152.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 3 — v1 P2PKH Keygen &amp; Backup</text>
+  <text x="766.0" y="170.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Generates target v1 P2PKH Base58 address</text>
+  <text x="766.0" y="186.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Runs export-keys → workspace/keys.export</text>
+  <text x="766.0" y="203.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Wallet wrapper enforces non-empty backup</text>
+  <text x="766.0" y="219.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">before any network mutation is unlocked</text>
+  <path d="M 368.0 191.0 L 394.0 191.0" fill="none" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 726.0 191.0 L 752.0 191.0" fill="none" stroke="#0d9488" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+  <rect x="36" y="270" width="332" height="118" rx="8" fill="#f8fafc" stroke="#7c3aed" stroke-width="1.3"/>
+  <rect x="36" y="270" width="5" height="118" rx="2.5" fill="#7c3aed"/>
+  <text x="50.0" y="290.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 4 — Sweep &amp; Nick Reconciliation</text>
+  <text x="50.0" y="308.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">sweep.py: migrate-v0-notes → ./txs/*.tx</text>
+  <text x="50.0" y="324.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">parse_balance_nicks: nocks*65536 + nicks</text>
+  <text x="50.0" y="341.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">reconcile(): sum(migrated) == pre − fees</text>
+  <text x="50.0" y="357.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Renders per-signer summary_table()</text>
+  <rect x="394" y="270" width="332" height="118" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="1.3"/>
+  <rect x="394" y="270" width="5" height="118" rx="2.5" fill="#e11d48"/>
+  <text x="408.0" y="290.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 5 — Human-Gated Broadcast</text>
+  <text x="408.0" y="308.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">confirm.py: verify keys.export backed up</text>
+  <text x="408.0" y="324.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">confirm_destination(): first-4 / last-4</text>
+  <text x="408.0" y="341.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Explicit operator y/N gate per send-tx</text>
+  <text x="408.0" y="357.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Appends non-secret audit to session.log</text>
+  <rect x="752" y="270" width="332" height="118" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.3"/>
+  <rect x="752" y="270" width="5" height="118" rx="2.5" fill="#059669"/>
+  <text x="766.0" y="290.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Phase 6 — Post-Broadcast Verification</text>
+  <text x="766.0" y="308.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Polls v1 P2PKH note acceptance &amp; balance</text>
+  <text x="766.0" y="324.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Confirms zero stranded v0 spendable notes</text>
+  <text x="766.0" y="341.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">Cross-checks final nocks/nicks total</text>
+  <text x="766.0" y="357.5" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">against Phase 4 expected net output</text>
+  <path d="M 918.0 250.0 L 918.0 260.0 L 202.0 260.0 L 202.0 270.0" fill="none" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <path d="M 368.0 329.0 L 394.0 329.0" fill="none" stroke="#e11d48" stroke-width="1.8" marker-end="url(#arrow-rose)"/>
+  <path d="M 726.0 329.0 L 752.0 329.0" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arrow-emerald)"/>
+  <rect x="20" y="422" width="526" height="166" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="20" y="422" width="526" height="32" rx="12" fill="#475569" fill-opacity="0.10"/>
+  <line x1="20" y1="454" x2="546" y2="454" stroke="#475569" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="357" y="428" width="179" height="20" rx="6" fill="#475569" fill-opacity="0.16" stroke="#475569" stroke-width="0.8"/>
+  <text x="446.5" y="442.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">src/nockchain_migration/</text>
+  <text x="34.0" y="443.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">2. Driver Package Architecture</text>
+  <rect x="36" y="464" width="494" height="108" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.3"/>
+  <rect x="36" y="464" width="5" height="108" rx="2.5" fill="#475569"/>
+  <text x="50.0" y="484.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a" text-anchor="start">Pure Core Modules &amp; Subprocess Boundary</text>
+  <text x="50.0" y="502.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">wallet.py  — Wrapper; refuses missing .tx / keys.export</text>
+  <text x="50.0" y="518.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">sweep.py   — MigrationTx parser &amp; nick conservation</text>
+  <text x="50.0" y="535.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">confirm.py — Base58 address_groups &amp; first/last-4 gate</text>
+  <text x="50.0" y="551.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="start">units.py   — Exact NICKS_PER_NOCK = 65,536 formatting</text>
+  <rect x="574" y="422" width="526" height="166" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <rect x="574" y="422" width="526" height="32" rx="12" fill="#d97706" fill-opacity="0.10"/>
+  <line x1="574" y1="454" x2="1100" y2="454" stroke="#d97706" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="964" y="428" width="126" height="20" rx="6" fill="#d97706" fill-opacity="0.16" stroke="#d97706" stroke-width="0.8"/>
+  <text x="1027.0" y="442.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#d97706" text-anchor="middle">Zero-Mock Tested</text>
+  <text x="588.0" y="443.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">3. Non-Bypassable Asset-Safety Invariants</text>
+  <rect x="590" y="464" width="494" height="108" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-width="1.3"/>
+  <text x="604.0" y="484.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#fbbf24" text-anchor="start">Enforced by Code in cli.py &amp; wallet.py</text>
+  <text x="604.0" y="502.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• No --yes / --force flag exists anywhere in CLI or wizard</text>
+  <text x="604.0" y="518.5" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• Dual-unit parser prevents '120000 nocks 0 nicks' → 0 bug</text>
+  <text x="604.0" y="535.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.0" font-weight="500" fill="#e2e8f0" text-anchor="start">• Seed phrase never touches argv logs, disk, or tracebacks</text>
+  <rect x="16" y="602" width="1088" height="28" rx="8" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="28.0" y="620.0" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1e293b" text-anchor="start">Canonical Authority: docs/nockchain-v0-to-v1-migration-handoff.md · Walkthrough: docs/MIGRATION_HOW_TO.md</text>
+  <text x="1092.0" y="620.0" font-family="ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace" font-size="11.0" font-weight="500" fill="#334155" text-anchor="end">CI: uv run --frozen pytest -q · MIT</text>
+</svg>
