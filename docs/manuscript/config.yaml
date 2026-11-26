@@ -1,0 +1,14 @@
+paper:
+  title: "Operator-Gated Migration of Nockchain Legacy Wallet Notes"
+  subtitle: "Implementation and verification notes"
+authors:
+  - name: "nockchain-migration contributors"
+publication:
+  date: "2026-11-26"
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false
