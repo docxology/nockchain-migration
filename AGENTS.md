@@ -40,4 +40,4 @@ python scripts/migrate.py phase0 --workspace /tmp/nock-test   # needs nockchain-
 
 Self-versioned repo published at `github.com/docxology/nockchain-migration` (MIT).
 Sensitive artifacts (`keys.export`, `txs/`, `*.zprv`) are gitignored — keep it
-that way. Repo-wide policy: [../../AGENTS.md](../../AGENTS.md).
+that way. See the [repository README](README.md) for this checkout’s scope and usage.
